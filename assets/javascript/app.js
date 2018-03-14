@@ -10,13 +10,28 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
-var trains = [];
 var name = "";
 var destination = "";
 var trainTime = "";
 var frequency = "";
+// var trainsRef = database.ref().child("trains");
+// var key = trainsRef.push().key;
+
+// trainsRef.on("value", function(snapshot) {
+//     $("#data-view").empty();
+//     for (row in snapshot.val()) {
+//         var nameDis = snapshot.child("name").val();
+//         var destinationDis = snapshot.child("destination").val();
+//         var frequencyDis = snapshot.child("frequency").val();
+//         var newRow = $("<tr><td>" + nameDis + "</td><td>" + destinationDis + "</td><td>" + frequencyDis + "</td></r>");
+//         $("#data-view").append(newRow)
+//     }
+
+    
+// });
 
 $("#add-train").on("click", function() {
+    $("#data-view").empty();
     event.preventDefault();
 
     name = $("#name-input").val();
@@ -36,62 +51,15 @@ $("#add-train").on("click", function() {
     };
     var result = trainsRef.update(update);
 
-    // database.ref("/trains").push({
-    //     name: name,
-    //     destination: destination,
-    //     frequency: frequency,
-    //     trainArrivalTime: trainTime
-
-    // });
-
-    // var trainIndex = {};
-
-    // trainIndex["Name"] = name;
-    // trainIndex["Destination"] = destination;
-    // trainIndex["Train Time"] = trainTime;
-    // trainIndex["Frequency"] = frequency;
-
-    // trains.push(trainIndex);
-
-    // var newTable = $("#data-view");
-
-    // for (property1 in trainIndex) {
-    //     var newTableData = $("<td>").text(trainIndex[property1]);
-    //     newTable.append(newTableData);
-    // };
-
-    // $("#data-view").append(newTable)
-
-    database.ref().on("value", function(snapshot) {
-        trains = [];
-        trains.push(snapshot.val());
+    trainsRef.on("value", function(snapshot) {
         $("#data-view").empty();
-        // var dataStuff = snapshot.val();
-        // var newData = snapshot.val();
-        // console.log(newData);
-        // for (dataSet in newData) {
-            // console.log(dataSet.val());
-            // var newTableData = $("<td>").text(dataSet[property1]);
-            // newTable.append(newTableData);
-        // }
-        var newTable = $("<tbody>");
+        var nameDis = snapshot.child(key).child("name").val();
+        var destinationDis = snapshot.child(key).child("destination").val();
+        var frequencyDis = snapshot.child(key).child("frequency").val();
 
-        var lookupItem = trains[0];
+        var newRow = $("<tr><td>" + nameDis + "</td><td>" + destinationDis + "</td><td>" + frequencyDis + "</td></r>");
 
-        for (row in lookupItem) {
-            var newRow = $("<tr>")
-            var nameDis = $("<td scope='col'>").text(row[name]);
-            newRow.append(nameDis);
-            var destinationDis = $("<td scope='col'>").text(row[destination]);
-            newRow.append(destinationDis);
-            var frequencyDis = $("<td scope='col'>").text(lookupItem[frequency]);
-            newRow.append(frequencyDis);
-
-            newTable.append(newRow)
-            
-        }
-
-        $("#data-view").append(newTable)
+        $("#data-view").append(newRow)
 
         // snapshot.forEach(function (childSnap) {
             
@@ -106,6 +74,7 @@ $("#add-train").on("click", function() {
     
     });
 });
+
   
         
 
