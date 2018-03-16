@@ -1,0 +1,48 @@
+.jumbotron {
+    /* background-image: url("../images/jumbotron_image.jpeg") */
+    background: white;
+    opacity: .88;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+body {
+    background-image: url("../images/background_image.jpeg")
+}
+
+form {
+    background: white;
+    padding: 2%;
+    border-radius: 10px;
+    opacity: .88;
+}
+
+h1 {
+    font-family: 'Roboto Mono', monospace;
+}
+
+p {
+    font-family: 'Inconsolata', monospace;
+}
+
+th, label {
+    font-family: 'Roboto Mono', monospace;
+}
+
+td, input {
+    font-family: 'Inconsolata', monospace;
+}
+
+#schedule {
+    background: white;
+    opacity: .88;
+    border-radius: 10px;
+}
+
+button {
+    font-family: 'Roboto Mono', monospace;
+}
+
+#button-spacing {
+    margin: 0;
+}
